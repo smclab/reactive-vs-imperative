@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+
+  aperitech.prometheus:
+    container_name: aperitech-prometheus
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - './prometheus.yml:/etc/prometheus/prometheus.yml'
+    networks:
+      - aperinet
+
+  aperitech.grafana:
+    container_name: aperitech-grafana
+    image: grafana/grafana:5.2.2
+    ports:
+      - 3000:3000
+    env_file:
+      - ./grafana.env
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    networks:
+      - aperinet
+
+networks:
+  aperinet:
+    driver: bridge
+    name: aperinet

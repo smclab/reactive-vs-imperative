@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+
+  aperitech.mongodb:
+    container_name: aperitech-mongodb
+    image: it.smc.aperitech/mongodb
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    networks:
+      - aperinet
+
+  aperitech.postgres:
+    container_name: aperitech-postgres
+    image: it.smc.aperitech/postgres
+    ports:
+      - '5532:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - aperinet
+
+networks:
+  aperinet:
+    driver: bridge
+    name: aperinet

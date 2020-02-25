@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-discovery
+  profiles:
+    active: ${SPRING_PROFILE:prod}
+
+eureka:
+  server:
+    enable-self-preservation: ${EUREKA_SELF_PRESERVATION:false}
+  instance:
+    prefer-ip-address: ${EUREKA_PREFER_IP_ADDRESS:false}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:localhost}
+  client:
+    registerWithEureka: ${EUREKA_CLIENT_REGISTER_WHIT_EUREKA:false}
+    fetchRegistry: ${EUREKA_CLIENT_FETCH_REGISTRY:false}
+    serviceUrl:
+      defaultZone: ${aperitech.eureka.instances:http://localhost:8761/eureka}
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = 11
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
+}
+
+dependencies {
+    implementation 'javax.ws.rs:jsr311-api:1.1.1'
+    implementation project(':common-api')
+    implementation 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+}

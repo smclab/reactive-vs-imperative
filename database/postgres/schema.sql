@@ -1,0 +1,7 @@
+CREATE TABLE city (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(1000),
+  country VARCHAR(1000),
+  lat DECIMAL,
+  lon DECIMAL
+);

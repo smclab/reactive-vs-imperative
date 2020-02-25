@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+
+  aperitech.city:
+    container_name: aperitech-imperative-city
+    image: it.smc.aperitech/imperative-city
+    environment:
+      SERVER_PORT: 8081
+      POSTGRES_HOST: aperitech-postgres
+      POSTGRES_PORT: 5432
+      WAIT_HOSTS: aperitech-postgres:5432
+      WAIT_HOSTS_TIMEOUT: 120
+      EUREKA_CLIENT_HOSTNAME: aperitech-imperative-city
+      CONFIG_EUREKA_SERVER_URL: http://aperitech-discovery:8761/eureka
+    networks:
+      - aperinet
+
+  aperitech.weather:
+    container_name: aperitech-imperative-weather
+    image: it.smc.aperitech/imperative-weather
+    environment:
+      SERVER_PORT: 8082
+      MONGO_HOST: aperitech-mongodb
+      MONGO_PORT: 27017
+      WAIT_HOSTS: aperitech-mongodb:27017
+      WAIT_HOSTS_TIMEOUT: 120
+      EUREKA_CLIENT_HOSTNAME: aperitech-imperative-weather
+      CONFIG_EUREKA_SERVER_URL: http://aperitech-discovery:8761/eureka
+    networks:
+      - aperinet
+
+  aperitech.aggregator:
+    container_name: aperitech-imperative-aggregator
+    image: it.smc.aperitech/imperative-aggregator
+    environment:
+      SERVER_PORT: 8084
+      EUREKA_CLIENT_HOSTNAME: aperitech-imperative-aggregator
+      CONFIG_EUREKA_SERVER_URL: http://aperitech-discovery:8761/eureka
+    networks:
+      - aperinet
+
+networks:
+  aperinet:
+    driver: bridge
+    name: aperinet

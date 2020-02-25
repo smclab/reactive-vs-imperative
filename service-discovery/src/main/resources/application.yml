@@ -1,0 +1,8 @@
+server:
+  port: ${PORT:8761}
+eureka:
+  instance:
+    instanceId: ${spring.application.name}-${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+logging:
+  pattern:
+    console: '%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable'

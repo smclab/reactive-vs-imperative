@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:api-gateway}
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+eureka:
+  instance:
+    prefer-ip-address: ${EUREKA_PREFER_IP_ADDRESS:false}
+    lease-expiration-duration-in-seconds: ${LEASE_EXPIRATION_DURATION_IN_SECONDS:30}
+    lease-renewal-interval-in-seconds: ${LEASE_RENEWAL_INTERVAL_IN_SECONDS:20}
+  client:
+    region: ${EUREKA_CLIENT_REGION:default}
+    registryFetchIntervalSeconds: ${REGISTRY_FETCH_INTERVAL_SECONDS:5}
+    serviceUrl:
+      defaultZone: ${CONFIG_EUREKA_SERVER_URL:http://localhost:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+webclient:
+  enable-keep-alive: ${WEB_CLIENT_KEEP_ALIVE:false}
+  read-timeout-in-seconds: ${WEB_CLIENT_READ_TIME_OUT:60}
+  write-timeout-in-seconds: ${WEB_CLIENT_WRITE_TIME_OUT:60}
+
+httpserver:
+  enable-keep-alive: ${HTTP_SERVER_KEEP_ALIVE:true}
+  so-backlog: ${HTTP_SERVER_SO_BACKLOG:2048}

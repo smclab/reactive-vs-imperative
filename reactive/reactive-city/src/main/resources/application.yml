@@ -1,0 +1,16 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5532}/${POSTGRES_DB:postgres}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PSWD:postgres}
+    initializationMode: NEVER
+    pool:
+      max-size: 100
+
+
+server:
+  port: ${PORT:8085}
+  eureka:
+    instance:
+      prefer-ip-address: ${EUREKA_PREFER_IP_ADDRESS:false}
+      instanceId: ${spring.application.name}-${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

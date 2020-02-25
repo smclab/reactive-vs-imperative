@@ -1,0 +1,21 @@
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: ${LEASE_EXPIRATION_DURATION_IN_SECONDS:30}
+    lease-renewal-interval-in-seconds: ${LEASE_RENEWAL_INTERVAL_IN_SECONDS:20}
+    hostname: ${EUREKA_CLIENT_HOSTNAME:localhost}
+    prefer-ip-address: false
+  client:
+    region: ${EUREKA_CLIENT_REGION:default}
+    registryFetchIntervalSeconds: ${REGISTRY_FETCH_INTERVAL_SECONDS:5}
+    serviceUrl:
+      defaultZone: ${CONFIG_EUREKA_SERVER_URL:http://localhost:8761/eureka}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:reactive-aggregator}
+  main:
+    allow-bean-definition-overriding: true

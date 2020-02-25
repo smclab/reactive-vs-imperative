@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+
+  aperitech.discovery:
+    container_name: aperitech-discovery
+    image: it.smc.aperitech/servicediscovery
+    environment:
+      aperitech.eureka.instances: 'http://aperitech-discovery:8761/eureka'
+      EUREKA_PREFER_IP_ADDRESS: 'true'
+      EUREKA_CLIENT_REGISTER_WHIT_EUREKA: 'true'
+      EUREKA_CLIENT_FETCH_REGISTRY: 'true'
+      EUREKA_INSTANCE_HOSTNAME: 'aperitech-discovery'
+      JAVA_OPTS: '-Xms512m -Xmx512m -Duser.timezone=Europe/Rome'
+      PORT: 8761
+    networks:
+      - aperinet
+    ports:
+      - '8761:8761'
+
+  aperitech.api-gateway:
+    container_name: aperitech-api-gateway
+    image: it.smc.aperitech/api-gateway
+    environment:
+      SERVER_PORT: 8090
+      EUREKA_CLIENT_HOSTNAME: aperitech-api-gateway
+      CONFIG_EUREKA_SERVER_URL: http://aperitech-discovery:8761/eureka
+    networks:
+      - aperinet
+    ports:
+      - '8090:8090'
+
+networks:
+ aperinet:
+  name: aperinet
+  driver: bridge
